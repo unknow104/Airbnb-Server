@@ -21,6 +21,8 @@ public class RoomConverter {
                 .price(roomDTO.getPrice())
                 .address(addressConverter.toEntity(roomDTO.getAddress()))
                 .washingMachine(roomDTO.isWashingMachine())
+                .created_at(roomDTO.getCreated_at())
+                .updated_at(roomDTO.getUpdated_at())
                 .television(roomDTO.isTelevision())
                 .airConditioner(roomDTO.isAirConditioner())
                 .wifi(roomDTO.isWifi())
@@ -49,6 +51,8 @@ public class RoomConverter {
                 .description(roomEntity.getDescription())
                 .price(roomEntity.getPrice())
                 .images(images)
+                .created_at(roomEntity.getCreated_at())
+                .updated_at(roomEntity.getUpdated_at())
                 .address(addressConverter.apply(roomEntity.getAddress()))
                 .codeLocation(roomEntity.getLocation().getName())
                 .washingMachine(roomEntity.isWashingMachine())
@@ -89,6 +93,8 @@ public class RoomConverter {
         entity.setParking(dto.isParking());
         entity.setPool(dto.isPool());
         entity.setHotAndColdMachine(dto.isHotAndColdMachine());
+        entity.setCreated_at(dto.getCreated_at());
+        entity.setUpdated_at(dto.getUpdated_at());
         return entity;
     }
 }

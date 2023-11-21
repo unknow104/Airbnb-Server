@@ -15,6 +15,7 @@ import java.util.List;
 public class WishlistAPI {
     @Autowired
     private IWishlistService iWishlistService;
+
     @GetMapping("/{userId}")
     public ResponseEntity<List<WishlistDTO>> getWishlist(@PathVariable Long userId) {
         return ResponseEntity.ok(iWishlistService.findAllByUserId(userId));
@@ -22,15 +23,25 @@ public class WishlistAPI {
 
     @PostMapping("/{idUser}/addWishlist")
     public ResponseEntity<?> addToWishlist(@PathVariable Long idUser, @RequestParam(name = "roomId") Long roomId) {
-        WishlistDTO wishlistDTO = iWishlistService.addToWishlist(idUser,roomId);
+        WishlistDTO wishlistDTO = iWishlistService.addToWishlist(idUser, roomId);
         if (wishlistDTO == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Room already exist");
         } else
             return ResponseEntity.ok(wishlistDTO);
     }
-        @DeleteMapping("{idUser}/delete")
-    public ResponseEntity<?> delete(@PathVariable Long idUser, @RequestParam(name = "roomId") Long roomId){
-        return ResponseEntity.ok(iWishlistService.removeToWishlist(idUser,roomId));
+
+    @PostMapping("/{idUser}/addWishlist/{roomId}")
+    public ResponseEntity<?> addToWishlistWithRoomId(@PathVariable Long idUser,@RequestParam(name = "roomId") Long roomId){
+        WishlistDTO wishlistDTO = iWishlistService.addToWishlist(idUser, roomId);
+        if (wishlistDTO==null){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Room already exist");
+        }else {
+            return ResponseEntity.ok(wishlistDTO);
+        }
+    }
+    @DeleteMapping("{idUser}/delete")
+    public ResponseEntity<?> delete(@PathVariable Long idUser, @RequestParam(name = "roomId") Long roomId) {
+        return ResponseEntity.ok(iWishlistService.removeToWishlist(idUser, roomId));
     }
 
 
