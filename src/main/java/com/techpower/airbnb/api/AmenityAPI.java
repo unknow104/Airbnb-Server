@@ -24,12 +24,22 @@ public class AmenityAPI {
         return !amenityDTOs.isEmpty() ? ResponseEntity.ok(amenityDTOs) : ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{amenityId}")
+    public ResponseEntity<AmenityDTO> getOne(@PathVariable("amenityId") Long id) {
+        if(iAmenityService.findOneById(id) != null) {
+            return ResponseEntity.ok(iAmenityService.findOneById(id));
+        }
+        return ResponseEntity.notFound().build();
+    }
+
     @PostMapping
-    public ResponseEntity<?> save(@PathVariable AmenityDTO dto) throws IOException, InterruptedException, ApiException {
+    public ResponseEntity<?> save(@RequestParam("id") Long id
+                                ,@RequestParam("name") String name
+                                ,@RequestParam("imageUrl") String imageUrl) throws IOException, InterruptedException, ApiException {
         AmenityDTO amenityDTO = AmenityDTO.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .imageUrl(dto.getImageUrl())
+                .id(id)
+                .name(name)
+                .imageUrl(imageUrl)
                 .build();
         AmenityDTO amenityDTOSave = iAmenityService.save(amenityDTO);
         if (amenityDTOSave == null) {
@@ -39,12 +49,13 @@ public class AmenityAPI {
     }
 
     @PutMapping("/{idAmenity}")
-    public ResponseEntity<AmenityDTO> update(@PathVariable("idAmenity") long idRoom,
-                                             @PathVariable AmenityDTO dto) throws IOException, InterruptedException, ApiException {
+    public ResponseEntity<AmenityDTO> update(@PathVariable("idAmenity") long idRoom
+                                            ,@RequestParam("name") String name
+                                            ,@RequestParam("imageUrl") String imageUrl) throws IOException, InterruptedException, ApiException {
         AmenityDTO amenityDTO = AmenityDTO.builder()
-                .id(dto.getId())
-                .name(dto.getName())
-                .imageUrl(dto.getImageUrl())
+                .id(idRoom)
+                .name(name)
+                .imageUrl(imageUrl)
                 .build();
         AmenityDTO amenityDTOSave = iAmenityService.update(amenityDTO);
 
