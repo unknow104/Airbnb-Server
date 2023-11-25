@@ -1,7 +1,7 @@
 package com.techpower.airbnb.service.impl;
 
 import com.techpower.airbnb.constant.Order;
-import com.techpower.airbnb.constant.PaymentMethod;
+//import com.techpower.airbnb.constant.PaymentMethod;
 import com.techpower.airbnb.converter.OrderConverter;
 import com.techpower.airbnb.dto.OrderDTO;
 import com.techpower.airbnb.entity.OrderEntity;
@@ -54,7 +54,7 @@ public class OrderService implements IOrderService {
                 userRepository.findOneById(orderDTO.getIdUser()),
                 roomEntity);
         orderEntity.setTotalPrice(totalPrice);
-        orderEntity.setPaymentMethod(PaymentMethod.CASH);
+//        orderEntity.setPaymentMethod(PaymentMethod.CASH);
 
         OrderDTO result = orderConverter.apply(orderRepository.save(orderEntity));
 
@@ -122,12 +122,12 @@ public class OrderService implements IOrderService {
         return orderConverter.apply(orderRepository.save(orderEntity));
     }
 
-    @Override
-    public void updatePaymentMethod(PaymentMethod paymentMethod, long idOrder) {
-        OrderEntity orderEntity = orderRepository.findOneById(idOrder);
-        orderEntity.setPaymentMethod(paymentMethod);
-        orderRepository.save(orderEntity);
-    }
+//    @Override
+//    public void updatePaymentMethod(PaymentMethod paymentMethod, long idOrder) {
+//        OrderEntity orderEntity = orderRepository.findOneById(idOrder);
+//        orderEntity.setPaymentMethod(paymentMethod);
+//        orderRepository.save(orderEntity);
+//    }
 
     @Override
     public void freeUpdateStatus(Order order, long idOrder) {
