@@ -3,6 +3,7 @@ package com.techpower.airbnb.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -40,9 +41,9 @@ public class RoomEntity {
     @Column
     private boolean pool;
     @Column
-    private Date created_at;
+    private LocalDateTime created_at;
     @Column
-    private Date updated_at;
+    private LocalDateTime updated_at;
     @Column
     private boolean hotAndColdMachine;
     @Column(name = "num_living_rooms")
