@@ -19,6 +19,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 
 @Service
@@ -96,20 +97,32 @@ public class OrderService implements IOrderService {
                     //xử lí thống kê
                     UserEntity userEntityAdmin = userRepository.findOneByEmail(emailAdmin);
                     UserEntity userEntitySeller = orderEntity.getRoom().getUser();
-                    if (statisticalRepository.findOneByUserAndYearAndMonth(
-                            userEntityAdmin, LocalDate.now().getYear(), LocalDate.now().getMonthValue()) == null) {
+                    if (statisticalRepository.findOneByUserAndYearAndMonthAndDay(
+                            userEntityAdmin,
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth())
+                            == null) {
                         statisticalRepository.save(new StatisticalEntity(userEntityAdmin));
                     }
-                    if (statisticalRepository.findOneByUserAndYearAndMonth(
-                            userEntitySeller, LocalDate.now().getYear(), LocalDate.now().getMonthValue()) == null) {
+                    if (statisticalRepository.findOneByUserAndYearAndMonthAndDay(
+                            userEntityAdmin,
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth())
+                            == null) {
                         statisticalRepository.save(new StatisticalEntity(userEntitySeller));
                     }
-                    StatisticalEntity statisticalAdmin = statisticalRepository.findOneByUserAndYearAndMonth(
-                            userEntityAdmin, LocalDate.now().getYear(), LocalDate.now().getMonthValue()
-                    );
-                    StatisticalEntity statisticalSeller = statisticalRepository.findOneByUserAndYearAndMonth(
-                            userEntitySeller, LocalDate.now().getYear(), LocalDate.now().getMonthValue()
-                    );
+                    StatisticalEntity statisticalAdmin = statisticalRepository.findOneByUserAndYearAndMonthAndDay(
+                            userEntityAdmin,
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth());
+                    StatisticalEntity statisticalSeller = statisticalRepository.findOneByUserAndYearAndMonthAndDay(
+                            userEntityAdmin,
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
+                            LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth());
                     statisticalAdmin.setReallyReceived(statisticalAdmin.getReallyReceived() + (orderEntity.getTotalPrice() * 0.1));
                     statisticalAdmin.setTotalRevenue(statisticalAdmin.getTotalRevenue() + (orderEntity.getTotalPrice() * 0.1));
                     statisticalSeller.setReallyReceived(statisticalSeller.getReallyReceived() + (orderEntity.getTotalPrice() * 0.9));

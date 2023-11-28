@@ -14,21 +14,26 @@ import java.util.List;
 public class StatisticalAPI {
     @Autowired
     private IStatisticalService iStatisticalService;
+
     @GetMapping("/{idUser}/{year}/{month}")
-    public ResponseEntity<StatisticalDTO> getStatisticalByYearAndMonth(@PathVariable("idUser") long idUser,
-                                                                       @PathVariable("year") int year,
-                                                                       @PathVariable("month") int month) {
-        StatisticalDTO statistical = iStatisticalService.getStatisticalByYearAndMonth(idUser, year, month);
+    public ResponseEntity<StatisticalDTO> getStatisticalByYearAndMonth(
+            @PathVariable("idUser") long idUser,
+            @PathVariable("year") int year,
+            @PathVariable("month") int month,
+            @PathVariable("day") int day
+    ) {
+        StatisticalDTO statistical = iStatisticalService.getStatisticalByYearAndMonthAndDay(idUser, year, month, day);
         if (statistical != null) {
             return ResponseEntity.ok(statistical);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-
+    
     @GetMapping("/{idUser}/{year}")
-    public ResponseEntity<List<StatisticalDTO>> getStatisticalByYear(@PathVariable("idUser") long idUser,
-                                                                     @PathVariable("year") int year) {
+    public ResponseEntity<List<StatisticalDTO>> getStatisticalByYear(
+            @PathVariable("idUser") long idUser,
+            @PathVariable("year") int year) {
         List<StatisticalDTO> statistical = iStatisticalService.getStatisticalByYear(idUser, year);
         if (statistical != null) {
             return ResponseEntity.ok(statistical);

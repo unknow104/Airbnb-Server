@@ -14,6 +14,7 @@ public class StatisticalConverter {
         StatisticalDTO dto = new StatisticalDTO();
         dto.setYear(entity.getYear());
         dto.setMonth(entity.getMonth());
+        dto.setDay(entity.getDay());
         dto.setTotalRevenue(entity.getTotalRevenue());
         dto.setReallyReceived(entity.getReallyReceived());
         return dto;
@@ -26,6 +27,7 @@ public class StatisticalConverter {
         StatisticalEntity entity = new StatisticalEntity();
         entity.setYear(dto.getYear());
         entity.setMonth(dto.getMonth());
+        entity.setDay(dto.getDay());
         entity.setTotalRevenue(dto.getTotalRevenue());
         entity.setReallyReceived(dto.getReallyReceived());
         return entity;

@@ -24,20 +24,21 @@ public class StatisticalService implements IStatisticalService {
     @Autowired
     private UserRepository userRepository;
 
-    @Override
-    public StatisticalDTO getStatisticalByYearAndMonth(long idUser, int year, int month) {
-        UserEntity userEntity = userRepository.findOneById(idUser);
-        StatisticalEntity statisticalEntity = statisticalRepository.findOneByUserAndYearAndMonth(
-                userEntity, year, month
-        );
-        return statisticalConverter.toDTO(statisticalEntity);
-    }
-
     public List<StatisticalDTO> sortStatisticalListByMonth(List<StatisticalDTO> statisticalList) {
         return statisticalList.stream()
                 .sorted(Comparator.comparingInt(StatisticalDTO::getMonth))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public StatisticalDTO getStatisticalByYearAndMonthAndDay(long idUser, int year, int month, int day) {
+        UserEntity userEntity = userRepository.findOneById(idUser);
+        StatisticalEntity statisticalEntity = statisticalRepository.findOneByUserAndYearAndMonthAndDay(
+                userEntity, year, month, day
+        );
+        return statisticalConverter.toDTO(statisticalEntity);
+    }
+
     @Override
     public List<StatisticalDTO> getStatisticalByYear(long idUser, int year) {
 
