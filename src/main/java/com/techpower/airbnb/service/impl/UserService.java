@@ -152,4 +152,23 @@ public class UserService implements IUserService {
             return null;
     }
 
+    @Override
+    public UserEntity update(UserEntity userEntity) {
+        UserEntity existUser = userRepository.findOneById(userEntity.getId());
+
+        existUser.setName(userEntity.getName());
+        existUser.setPhone(userEntity.getPhone());
+        existUser.setEmail(userEntity.getEmail());
+        existUser.setBirthday(userEntity.getBirthday());
+        existUser.setGender(userEntity.isGender());
+
+        return userRepository.save(existUser);
+    }
+
+    @Override
+    public UserEntity getOne(Long idUser) {
+        return userRepository.getOne(idUser);
+    }
+
+
 }

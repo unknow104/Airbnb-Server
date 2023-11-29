@@ -3,6 +3,8 @@ package com.techpower.airbnb.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Builder
 @Getter
 @Setter
@@ -20,4 +22,6 @@ public class AmenityEntity {
     @Column
     private String imageUrl;
 
+    @ManyToMany(mappedBy = "amenities")
+    private Set<RoomEntity> rooms;
 }
