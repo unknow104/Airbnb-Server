@@ -11,5 +11,4 @@ public class AmenityDTO {
     private Long id;
     private String name;
     private String imageUrl;
-
 }

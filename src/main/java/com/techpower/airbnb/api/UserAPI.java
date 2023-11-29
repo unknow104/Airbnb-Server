@@ -2,6 +2,9 @@ package com.techpower.airbnb.api;
 
 import com.techpower.airbnb.constant.Status;
 import com.techpower.airbnb.dto.UserDTO;
+import com.techpower.airbnb.entity.AmenityEntity;
+import com.techpower.airbnb.entity.UserEntity;
+import com.techpower.airbnb.repository.UserRepository;
 import com.techpower.airbnb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,7 @@ import java.util.List;
 public class UserAPI {
     @Autowired
     private IUserService userService;
+
 
     @GetMapping("/customer")
     public ResponseEntity<List<UserDTO>> getAllUser() {
@@ -77,5 +81,36 @@ public class UserAPI {
     public ResponseEntity<?> updateStatus(@PathVariable("idUser") long idUser,
                                           @RequestParam("status") Status status) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateStatus(status, idUser));
+    }
+
+    @PutMapping("/profile/{idUser}")
+    public ResponseEntity<?> updateProfile(@PathVariable("idUser") Long idUser,
+                                           @RequestParam("name") String name,
+                                           @RequestParam("phone") String phone,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("birthday") String birthday,
+                                           @RequestParam("gender") boolean gender) {
+
+        try {
+            UserEntity existUser = userService.getOne(idUser);
+
+            if(existUser != null){
+                UserEntity amenityEntity = UserEntity.builder()
+                        .id(idUser)
+                        .name(name)
+                        .phone(phone)
+                        .email(email)
+                        .birthday(birthday)
+                        .gender(gender)
+                        .build();
+                UserEntity userEntitySave = userService.update(amenityEntity);
+                return ResponseEntity.status(HttpStatus.OK).body(userEntitySave);
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy người dùng này");
+            }
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Lỗi khi tạo dịch vụ.");
+        }
+
     }
 }

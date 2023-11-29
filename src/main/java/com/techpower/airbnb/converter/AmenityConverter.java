@@ -25,6 +25,7 @@ public class AmenityConverter {
                 .build();
     }
 
+
     public List<AmenityDTO> toDTOs(List<AmenityEntity> amenityEntities) {
         List<AmenityDTO> amenityDTOs = new ArrayList<>();
         for(AmenityEntity amenityEntity:amenityEntities) {

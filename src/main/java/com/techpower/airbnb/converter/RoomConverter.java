@@ -1,6 +1,8 @@
 package com.techpower.airbnb.converter;
 
+import com.techpower.airbnb.dto.AmenityDTO;
 import com.techpower.airbnb.dto.RoomDTO;
+import com.techpower.airbnb.entity.AmenityEntity;
 import com.techpower.airbnb.entity.ImageRoomEntity;
 import com.techpower.airbnb.entity.RoomEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,28 +10,28 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class RoomConverter {
     @Autowired
     private AddressConverter addressConverter;
+    @Autowired
+    private AmenityConverter amenityConverter;
 
     public RoomEntity toEntity(RoomDTO roomDTO) {
+        Set<AmenityEntity> amenities = roomDTO.getAmenities()
+                .stream()
+                .map(amenityConverter::toEntity)
+                .collect(Collectors.toSet());
+
         return RoomEntity.builder()
                 .name(roomDTO.getName())
                 .description(roomDTO.getDescription())
                 .price(roomDTO.getPrice())
                 .address(addressConverter.toEntity(roomDTO.getAddress()))
-                .washingMachine(roomDTO.isWashingMachine())
-                .created_at(roomDTO.getCreated_at())
-                .updated_at(roomDTO.getUpdated_at())
-                .television(roomDTO.isTelevision())
-                .airConditioner(roomDTO.isAirConditioner())
-                .wifi(roomDTO.isWifi())
-                .kitchen(roomDTO.isKitchen())
-                .parking(roomDTO.isParking())
-                .pool(roomDTO.isPool())
-                .hotAndColdMachine(roomDTO.isHotAndColdMachine())
+                .amenities(amenities)
                 .maxGuests(roomDTO.getMaxGuests())
                 .numLivingRooms(roomDTO.getNumLivingRooms())
                 .numBathrooms(roomDTO.getNumBathrooms())
@@ -45,6 +47,11 @@ public class RoomConverter {
                 images.add(image.getUrlImage());
             }
         }
+        Set<AmenityDTO> amenityDTOs = roomEntity.getAmenities()
+                .stream()
+                .map(amenityConverter::toDTO)
+                .collect(Collectors.toSet());
+
         return RoomDTO.builder()
                 .id(roomEntity.getId())
                 .name(roomEntity.getName())
@@ -55,14 +62,7 @@ public class RoomConverter {
                 .updated_at(roomEntity.getUpdated_at())
                 .address(addressConverter.apply(roomEntity.getAddress()))
                 .codeLocation(roomEntity.getLocation().getName())
-                .washingMachine(roomEntity.isWashingMachine())
-                .television(roomEntity.isTelevision())
-                .airConditioner(roomEntity.isAirConditioner())
-                .wifi(roomEntity.isWifi())
-                .kitchen(roomEntity.isKitchen())
-                .parking(roomEntity.isParking())
-                .pool(roomEntity.isPool())
-                .hotAndColdMachine(roomEntity.isHotAndColdMachine())
+                .amenities(amenityDTOs)
                 .maxGuests(roomEntity.getMaxGuests())
                 .numLivingRooms(roomEntity.getNumLivingRooms())
                 .numBedrooms(roomEntity.getNumBedrooms())
@@ -81,18 +81,15 @@ public class RoomConverter {
     }
 
     public RoomEntity toEntity(RoomDTO dto, RoomEntity entity) {
+        Set<AmenityEntity> amenities = dto.getAmenities()
+                .stream()
+                .map(amenityConverter::toEntity)
+                .collect(Collectors.toSet());
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());
         entity.setPrice(dto.getPrice());
-        entity.setWashingMachine(dto.isWashingMachine());
-        entity.setTelevision(dto.isTelevision());
-        entity.setAirConditioner(dto.isAirConditioner());
-        entity.setWifi(dto.isWifi());
-        entity.setKitchen(dto.isKitchen());
-        entity.setParking(dto.isParking());
-        entity.setPool(dto.isPool());
-        entity.setHotAndColdMachine(dto.isHotAndColdMachine());
+        entity.setAmenities(amenities);
         entity.setCreated_at(dto.getCreated_at());
         entity.setUpdated_at(dto.getUpdated_at());
         return entity;

@@ -7,6 +7,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Builder
 @Getter
@@ -26,20 +27,13 @@ public class RoomEntity {
     private String description;
     @Column
     private double price;
-    @Column
-    private boolean washingMachine;
-    @Column
-    private boolean television;
-    @Column
-    private boolean airConditioner;
-    @Column
-    private boolean wifi;
-    @Column
-    private boolean kitchen;
-    @Column
-    private boolean parking;
-    @Column
-    private boolean pool;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "room_amenity",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "amenity_id")
+    )
+    private Set<AmenityEntity> amenities;
     @Column
     private LocalDateTime created_at;
     @Column
