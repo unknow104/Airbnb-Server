@@ -24,7 +24,7 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "users_id")
+    @Column(name = "user_id")
     private Long id;
     @Column
     @Enumerated(EnumType.STRING)

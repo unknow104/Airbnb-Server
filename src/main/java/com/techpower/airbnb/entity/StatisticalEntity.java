@@ -26,7 +26,7 @@ public class StatisticalEntity {
     @Column
     private double reallyReceived;
     @ManyToOne
-    @JoinColumn(name = "used_id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public StatisticalEntity(UserEntity user) {

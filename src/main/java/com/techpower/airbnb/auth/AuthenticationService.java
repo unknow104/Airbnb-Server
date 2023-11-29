@@ -60,7 +60,7 @@ public class AuthenticationService {
         if (userExists) {
             // TODO check of attributes are the same and
             // TODO if email not confirmed send confirmation email.
-            throw new IllegalStateException("email already taken");
+            throw new IllegalStateException("Email already taken");
         }
 
         var user = UserEntity.builder()
