@@ -159,8 +159,8 @@ public class UserService implements IUserService {
         existUser.setName(userEntity.getName());
         existUser.setPhone(userEntity.getPhone());
         existUser.setEmail(userEntity.getEmail());
-        existUser.setBirthday(userEntity.getBirthday());
-        existUser.setGender(userEntity.isGender());
+//        existUser.setBirthday(userEntity.getBirthday());
+//        existUser.setGender(userEntity.isGender());
 
         return userRepository.save(existUser);
     }
