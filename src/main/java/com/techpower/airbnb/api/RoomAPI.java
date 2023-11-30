@@ -4,7 +4,6 @@ import com.google.maps.errors.ApiException;
 import com.techpower.airbnb.dto.AddressDTO;
 import com.techpower.airbnb.dto.FeedbackDTO;
 import com.techpower.airbnb.dto.RoomDTO;
-import com.techpower.airbnb.entity.RoomEntity;
 import com.techpower.airbnb.repository.RoomRepository;
 import com.techpower.airbnb.request.SearchHouseRequest;
 import com.techpower.airbnb.response.DayBooking;
@@ -59,7 +58,7 @@ public class RoomAPI {
     }
 
     @GetMapping("{idRoom}/feedback")
-    public ResponseEntity<List<FeedbackDTO>> findAllFeedback(@PathVariable("idRoom") Long idRoom){
+    public ResponseEntity<List<FeedbackDTO>> findAllFeedback(@PathVariable("idRoom") Long idRoom) {
         return ResponseEntity.ok(iRoomService.findAllFeedbackByIDRoom(idRoom));
     }
 
@@ -146,25 +145,26 @@ public class RoomAPI {
     }
 
     @PutMapping("/{idRoom}")
-    public ResponseEntity<RoomDTO> update(@PathVariable("idRoom") long idRoom,
-                                          @RequestParam("name") String name,
-                                          @RequestParam("description") String description,
-                                          @RequestParam("price") double price,
-                                          @RequestParam(value = "images", required = false) List<MultipartFile> images,
-                                          @RequestParam(value = "codeLocation", required = false) String codeLocation,
-                                          @RequestParam("address") String address,
-                                          @RequestParam(value = "washingMachine", required = false) boolean washingMachine,
-                                          @RequestParam(value = "television", required = false) boolean television,
-                                          @RequestParam(value = "airConditioner", required = false) boolean airConditioner,
-                                          @RequestParam(value = "wifi", required = false) boolean wifi,
-                                          @RequestParam(value = "kitchen", required = false) boolean kitchen,
-                                          @RequestParam(value = "parking", required = false) boolean parking,
-                                          @RequestParam(value = "pool", required = false) boolean pool,
-                                          @RequestParam(value = "hotAndColdMachine", required = false) boolean hotAndColdMachine,
-                                          @RequestParam("maxGuests") int maxGuests,
-                                          @RequestParam("numLivingRooms") int numLivingRooms,
-                                          @RequestParam("numBathrooms") int numBathrooms,
-                                          @RequestParam("numBedrooms") int numBedrooms) throws IOException, InterruptedException, ApiException {
+    public ResponseEntity<RoomDTO> update(
+            @PathVariable("idRoom") long idRoom,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam(value = "images", required = false) List<MultipartFile> images,
+            @RequestParam(value = "codeLocation", required = false) String codeLocation,
+            @RequestParam("address") String address,
+            @RequestParam(value = "washingMachine", required = false) boolean washingMachine,
+            @RequestParam(value = "television", required = false) boolean television,
+            @RequestParam(value = "airConditioner", required = false) boolean airConditioner,
+            @RequestParam(value = "wifi", required = false) boolean wifi,
+            @RequestParam(value = "kitchen", required = false) boolean kitchen,
+            @RequestParam(value = "parking", required = false) boolean parking,
+            @RequestParam(value = "pool", required = false) boolean pool,
+            @RequestParam(value = "hotAndColdMachine", required = false) boolean hotAndColdMachine,
+            @RequestParam("maxGuests") int maxGuests,
+            @RequestParam("numLivingRooms") int numLivingRooms,
+            @RequestParam("numBathrooms") int numBathrooms,
+            @RequestParam("numBedrooms") int numBedrooms) throws IOException, InterruptedException, ApiException {
 
         List<String> imagesDTO = new ArrayList<>();
         if (images != null && !images.isEmpty()) {
@@ -202,11 +202,6 @@ public class RoomAPI {
         return ResponseEntity.status(HttpStatus.OK).body(saveRoom);
     }
 
-//<<<<<<< HEAD
-//    @DeleteMapping("delete/{id}")
-//    public void deleteRoom(@PathVariable Long id) {
-//        iRoomService.deleteById(id);
-//=======
     @DeleteMapping("/{idRoom}")
     public ResponseEntity<?> delete(@PathVariable("idRoom") Long idRoom) {
         return ResponseEntity.ok(iRoomService.delete(idRoom));

@@ -8,6 +8,7 @@ import lombok.Setter;
 public class StatisticalDTO {
     private int year;
     private int month;
+    private int day;
     private double totalRevenue;
     private double reallyReceived;
 }

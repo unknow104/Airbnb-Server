@@ -74,8 +74,17 @@ public class UserAPI {
     }
 
     @PutMapping("/{idUser}")
-    public ResponseEntity<?> updateStatus(@PathVariable("idUser") long idUser,
-                                          @RequestParam("status") Status status) {
+    public ResponseEntity<?> updateStatus(
+            @PathVariable("idUser") long idUser,
+            @RequestParam("status") Status status
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateStatus(status, idUser));
+    }
+
+    @PutMapping("/host/{idUser}")
+    public ResponseEntity<?> updateRole(
+            @PathVariable("idUser") long idUser
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateToHost(idUser));
     }
 }
