@@ -58,7 +58,7 @@ public class RoomEntity {
     @JoinColumn(name = "address_id")
     private AddressEntity address;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
     @ManyToOne
     @JoinColumn(name = "location_id")

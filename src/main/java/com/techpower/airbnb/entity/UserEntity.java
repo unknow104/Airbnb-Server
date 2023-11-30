@@ -21,7 +21,7 @@ public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "users_id")
+    @Column(name = "user_id")
     private Long id;
     @Column
     @Enumerated(EnumType.STRING)
@@ -62,7 +62,7 @@ public class UserEntity implements UserDetails {
     @ManyToMany
     @JoinTable(
             name = "user_achievements",
-            joinColumns = @JoinColumn(name = "users_id"),
+            joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "achievement_id"))
     private Set<AchievementEntity> achievements = new HashSet<>();
 
