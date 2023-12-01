@@ -20,10 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
@@ -76,10 +73,12 @@ public class RoomAPI {
     }
 
     @GetMapping("/trungNgay")
-    public ResponseEntity<?> searchTrungNgay(@RequestParam("start") LocalDate start,
-                                             @RequestParam("end") LocalDate end,
-                                             @RequestParam("startSearch") LocalDate startSearch,
-                                             @RequestParam("endSearch") LocalDate endSearch) {
+    public ResponseEntity<?> searchTrungNgay(
+            @RequestParam("start") LocalDate start,
+            @RequestParam("end") LocalDate end,
+            @RequestParam("startSearch") LocalDate startSearch,
+            @RequestParam("endSearch") LocalDate endSearch
+    ) {
         if ((startSearch.isAfter(start) && startSearch.isBefore(end)) ||
                 (endSearch.isAfter(start) && endSearch.isBefore(end)) ||
                 (startSearch.equals(start) && endSearch.equals(end)) ||
@@ -95,18 +94,20 @@ public class RoomAPI {
 
 
     @PostMapping("{idUser}")
-    public ResponseEntity<?> save(@PathVariable("idUser") long idUser,
-                                  @RequestParam("name") String name,
-                                  @RequestParam("description") String description,
-                                  @RequestParam("price") Double price,
-                                  @RequestParam(value = "images", required = false) List<MultipartFile> images,
-                                  @RequestParam("codeLocation") String codeLocation,
-                                  @RequestParam("address") String address,
-                                  @RequestParam("amenities") List<Long> amenityIds,
-                                  @RequestParam("maxGuests") Integer maxGuests,
-                                  @RequestParam("numLivingRooms") Integer numLivingRooms,
-                                  @RequestParam("numBathrooms") Integer numBathrooms,
-                                  @RequestParam("numBedrooms") Integer numBedrooms) throws IOException, InterruptedException, ApiException {
+    public ResponseEntity<?> save(
+            @PathVariable("idUser") long idUser,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") Double price,
+            @RequestParam(value = "images", required = false) List<MultipartFile> images,
+            @RequestParam("codeLocation") String codeLocation,
+            @RequestParam("address") String address,
+            @RequestParam("amenities") List<Long> amenityIds,
+            @RequestParam("maxGuests") Integer maxGuests,
+            @RequestParam("numLivingRooms") Integer numLivingRooms,
+            @RequestParam("numBathrooms") Integer numBathrooms,
+            @RequestParam("numBedrooms") Integer numBedrooms
+    ) throws IOException, InterruptedException, ApiException {
 
         List<String> imagesDTO = new ArrayList<>();
         if (images != null && !images.isEmpty()) {

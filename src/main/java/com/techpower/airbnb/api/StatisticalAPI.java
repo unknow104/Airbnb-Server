@@ -15,7 +15,7 @@ public class StatisticalAPI {
     @Autowired
     private IStatisticalService iStatisticalService;
 
-    @GetMapping("/{idUser}/{year}/{month}")
+    @GetMapping("/{idUser}/{year}/{month}/{day}")
     public ResponseEntity<StatisticalDTO> getStatisticalByYearAndMonth(
             @PathVariable("idUser") long idUser,
             @PathVariable("year") int year,

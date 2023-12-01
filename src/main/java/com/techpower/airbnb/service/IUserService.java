@@ -38,6 +38,4 @@ public interface IUserService {
 
     UserEntity getOne(Long idUser);
 
-    String imageChange(Long idUser, String imageUrl);
-
 }

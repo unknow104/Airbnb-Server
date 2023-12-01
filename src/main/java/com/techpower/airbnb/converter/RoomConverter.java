@@ -25,7 +25,6 @@ public class RoomConverter {
                 .stream()
                 .map(amenityConverter::toEntity)
                 .toList();
-
         return RoomEntity.builder()
                 .name(roomDTO.getName())
                 .description(roomDTO.getDescription())

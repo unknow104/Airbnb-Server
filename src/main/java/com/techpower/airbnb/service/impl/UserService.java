@@ -115,6 +115,7 @@ public class UserService implements IUserService {
         userInfo.put("name", userEntity.getName());
         userInfo.put("email", userEntity.getEmail());
         userInfo.put("phone", userEntity.getPhone());
+        userInfo.put("image", userEntity.getImage());
         userInfo.put("gender", userEntity.isGender());
         userInfo.put("birthday", userEntity.getBirthday());
         userInfo.put("status", userEntity.getStatus());
@@ -161,13 +162,12 @@ public class UserService implements IUserService {
     @Override
     public UserEntity update(UserEntity userEntity) {
         UserEntity existUser = userRepository.findOneById(userEntity.getId());
-
         existUser.setName(userEntity.getName());
         existUser.setPhone(userEntity.getPhone());
         existUser.setEmail(userEntity.getEmail());
-//        existUser.setBirthday(userEntity.getBirthday());
+        existUser.setBirthday(userEntity.getBirthday());
         existUser.setGender(userEntity.isGender());
-
+        existUser.setImage(userEntity.getImage());
         return userRepository.save(existUser);
     }
 
@@ -175,13 +175,5 @@ public class UserService implements IUserService {
     public UserEntity getOne(Long idUser) {
         return userRepository.getOne(idUser);
     }
-
-    @Override
-    public String imageChange(Long idUser, String imageUrl) {
-        UserEntity existUser = userRepository.findOneById(idUser);
-        existUser.setImageUrl(imageUrl);
-        return null;
-    }
-
 
 }
