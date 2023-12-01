@@ -2,6 +2,7 @@ package com.techpower.airbnb.service;
 
 
 import com.techpower.airbnb.dto.FeedbackDTO;
+import com.techpower.airbnb.entity.UserEntity;
 import com.techpower.airbnb.response.RoomBookings;
 import com.techpower.airbnb.constant.Status;
 import com.techpower.airbnb.dto.OrderDTO;
@@ -31,6 +32,12 @@ public interface IUserService {
     Map<String, Object> getInformation(Long idUser);
     List<UserDTO> getAllCustomer();
     List<UserDTO> getAllOwner();
-     UserDTO lock(long idUser,String status);
+    UserDTO lock(long idUser,String status);
+
+    UserEntity update(UserEntity userEntity);
+
+    UserEntity getOne(Long idUser);
+
+    String imageChange(Long idUser, String imageUrl);
 
 }

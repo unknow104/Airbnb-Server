@@ -43,6 +43,8 @@ public class UserEntity implements UserDetails {
     @Column(name = "code_confirmed", length = 6)
     private String codeConfirmed;
     @Column
+    private String imageUrl;
+    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")
@@ -65,6 +67,8 @@ public class UserEntity implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "achievement_id"))
     private Set<AchievementEntity> achievements = new HashSet<>();
+
+
 
 
     @Override
