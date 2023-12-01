@@ -22,6 +22,7 @@ public class AmenityEntity {
     @Column
     private String imageUrl;
 
-    @ManyToMany(mappedBy = "amenities")
-    private Set<RoomEntity> rooms;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private RoomEntity room;
 }

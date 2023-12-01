@@ -129,7 +129,7 @@ public class RoomAPI {
                 .price(price)
                 .images(imagesDTO)
                 .address(addressDTO)
-                .amenities(new HashSet<>(amenities))
+                .amenities(amenities)
                 .codeLocation(codeLocation)
                 .maxGuests(maxGuests)
                 .numLivingRooms(numLivingRooms)
@@ -151,7 +151,7 @@ public class RoomAPI {
                                           @RequestParam(value = "images", required = false) List<MultipartFile> images,
                                           @RequestParam(value = "codeLocation", required = false) String codeLocation,
                                           @RequestParam("address") String address,
-                                          @RequestParam("amenities") Set<Long> amenityIds,
+                                          @RequestParam("amenities") List<Long> amenityIds,
                                           @RequestParam("maxGuests") int maxGuests,
                                           @RequestParam("numLivingRooms") int numLivingRooms,
                                           @RequestParam("numBathrooms") int numBathrooms,
@@ -180,7 +180,7 @@ public class RoomAPI {
                 .images(imagesDTO)
                 .address(addressDTO)
                 .codeLocation(codeLocation)
-                .amenities(new HashSet<>(amenities))
+                .amenities(amenities)
                 .maxGuests(maxGuests)
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)

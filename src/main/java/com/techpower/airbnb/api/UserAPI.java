@@ -87,8 +87,9 @@ public class UserAPI {
     public ResponseEntity<?> updateProfile(@PathVariable("idUser") Long idUser,
                                            @RequestParam("name") String name,
                                            @RequestParam("phone") String phone,
-                                           @RequestParam("email") String email
-                                           ) {
+                                           @RequestParam("email") String email,
+//                                           @RequestParam("birthday") String birthday,
+                                           @RequestParam("gender") boolean gender) {
 
         try {
             UserEntity existUser = userService.getOne(idUser);
@@ -100,7 +101,7 @@ public class UserAPI {
                         .phone(phone)
                         .email(email)
 //                        .birthday(birthday)
-//                        .gender(gender)
+                        .gender(gender)
                         .build();
                 UserEntity userEntitySave = userService.update(amenityEntity);
                 return ResponseEntity.status(HttpStatus.OK).body(userEntitySave);

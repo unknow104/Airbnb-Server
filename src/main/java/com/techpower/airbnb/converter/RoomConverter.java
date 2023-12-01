@@ -21,10 +21,10 @@ public class RoomConverter {
     private AmenityConverter amenityConverter;
 
     public RoomEntity toEntity(RoomDTO roomDTO) {
-        Set<AmenityEntity> amenities = roomDTO.getAmenities()
+        List<AmenityEntity> amenities = roomDTO.getAmenities()
                 .stream()
                 .map(amenityConverter::toEntity)
-                .collect(Collectors.toSet());
+                .toList();
 
         return RoomEntity.builder()
                 .name(roomDTO.getName())
@@ -47,10 +47,10 @@ public class RoomConverter {
                 images.add(image.getUrlImage());
             }
         }
-        Set<AmenityDTO> amenityDTOs = roomEntity.getAmenities()
+        List<AmenityDTO> amenityDTOs = roomEntity.getAmenities()
                 .stream()
                 .map(amenityConverter::toDTO)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
 
         return RoomDTO.builder()
                 .id(roomEntity.getId())
@@ -81,10 +81,10 @@ public class RoomConverter {
     }
 
     public RoomEntity toEntity(RoomDTO dto, RoomEntity entity) {
-        Set<AmenityEntity> amenities = dto.getAmenities()
+        List<AmenityEntity> amenities = dto.getAmenities()
                 .stream()
                 .map(amenityConverter::toEntity)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toList());
         entity.setId(dto.getId());
         entity.setName(dto.getName());
         entity.setDescription(dto.getDescription());

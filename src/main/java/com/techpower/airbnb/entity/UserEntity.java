@@ -46,6 +46,8 @@ public class UserEntity implements UserDetails {
     @Column(name = "code_confirmed", length = 6)
     private String codeConfirmed;
     @Column
+    private String imageUrl;
+    @Column
     @Enumerated(EnumType.STRING)
     private Role role;
     @OneToMany(mappedBy = "user")
@@ -61,6 +63,8 @@ public class UserEntity implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<WishlistEntity> wishlists;
+
+
 
 
     @Override

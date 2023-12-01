@@ -27,13 +27,8 @@ public class RoomEntity {
     private String description;
     @Column
     private double price;
-    @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(
-            name = "room_amenity",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "amenity_id")
-    )
-    private Set<AmenityEntity> amenities;
+    @OneToMany(mappedBy = "room")
+    private List<AmenityEntity> amenities;
     @Column
     private LocalDateTime created_at;
     @Column
@@ -52,7 +47,7 @@ public class RoomEntity {
     @JoinColumn(name = "address_id")
     private AddressEntity address;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "users_id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
     @ManyToOne
     @JoinColumn(name = "location_id")

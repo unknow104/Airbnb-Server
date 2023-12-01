@@ -23,7 +23,7 @@ public class RoomDTO {
     private String codeLocation;
     private AddressDTO address;
     private boolean available;
-    private Set<AmenityDTO> amenities;
+    private List<AmenityDTO> amenities;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private int maxGuests;
