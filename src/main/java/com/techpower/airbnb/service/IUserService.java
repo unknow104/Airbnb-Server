@@ -17,6 +17,8 @@ public interface IUserService {
 
     List<RoomDTO> findAllRooms(long idUser);
 
+    UserDTO updateToHost(long idUser);
+
     List<RoomBookings> findAllBookingsDate(Long idUser);
 
     List<OrderDTO> getAllOrdersByOwner(Long idUser);

@@ -102,6 +102,12 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserDTO updateToHost(long idUser) {
+        UserEntity userEntity = userRepository.findOneById(idUser);
+        userEntity.setRole(Role.OWNER);
+        return userDTOMapper.apply(userRepository.save(userEntity));
+    }
+    @Override
     public Map<String, Object> getInformation(Long idUser) {
         UserEntity userEntity = userRepository.findOneById(idUser);
         Map<String, Object> userInfo = new HashMap<>();

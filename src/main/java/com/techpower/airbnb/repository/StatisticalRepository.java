@@ -9,7 +9,7 @@ import java.util.List;
 
 @Repository
 public interface StatisticalRepository extends JpaRepository<StatisticalEntity, Long> {
-    StatisticalEntity findOneByUserAndYearAndMonth(UserEntity userEntity, int year, int month);
+    StatisticalEntity findOneByUserAndYearAndMonthAndDay(UserEntity userEntity, int year, int month, int day);
 
     List<StatisticalEntity> findByUser_IdAndYear(Long id, int year);
 

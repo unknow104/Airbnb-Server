@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 @Getter
 @Setter
@@ -22,6 +23,8 @@ public class StatisticalEntity {
     @Column
     private int month;
     @Column
+    private int day;
+    @Column
     private double totalRevenue;
     @Column
     private double reallyReceived;
@@ -31,7 +34,8 @@ public class StatisticalEntity {
 
     public StatisticalEntity(UserEntity user) {
         this.user = user;
-        this.year = LocalDate.now().getYear();
-        this.month = LocalDate.now().getMonthValue();
+        this.year = LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear();
+        this.month = LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue();
+        this.day = LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth();
     }
 }

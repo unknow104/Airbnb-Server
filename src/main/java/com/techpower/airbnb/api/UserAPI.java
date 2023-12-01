@@ -78,11 +78,13 @@ public class UserAPI {
     }
 
     @PutMapping("/{idUser}")
-    public ResponseEntity<?> updateStatus(@PathVariable("idUser") long idUser,
-                                          @RequestParam("status") Status status) {
+    public ResponseEntity<?> updateStatus(
+            @PathVariable("idUser") long idUser,
+            @RequestParam("status") Status status
+    ) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateStatus(status, idUser));
     }
-
+  
     @PutMapping("/profile/{idUser}")
     public ResponseEntity<?> updateProfile(@PathVariable("idUser") Long idUser,
                                            @RequestParam("name") String name,
@@ -112,5 +114,10 @@ public class UserAPI {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Lỗi khi tạo dịch vụ.");
         }
 
+    @PutMapping("/host/{idUser}")
+    public ResponseEntity<?> updateRole(
+            @PathVariable("idUser") long idUser
+    ) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.updateToHost(idUser));
     }
 }

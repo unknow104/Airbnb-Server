@@ -5,7 +5,6 @@ import com.techpower.airbnb.dto.AddressDTO;
 import com.techpower.airbnb.dto.AmenityDTO;
 import com.techpower.airbnb.dto.FeedbackDTO;
 import com.techpower.airbnb.dto.RoomDTO;
-import com.techpower.airbnb.entity.RoomEntity;
 import com.techpower.airbnb.repository.RoomRepository;
 import com.techpower.airbnb.request.SearchHouseRequest;
 import com.techpower.airbnb.response.DayBooking;
@@ -66,7 +65,7 @@ public class RoomAPI {
     }
 
     @GetMapping("{idRoom}/feedback")
-    public ResponseEntity<List<FeedbackDTO>> findAllFeedback(@PathVariable("idRoom") Long idRoom){
+    public ResponseEntity<List<FeedbackDTO>> findAllFeedback(@PathVariable("idRoom") Long idRoom) {
         return ResponseEntity.ok(iRoomService.findAllFeedbackByIDRoom(idRoom));
     }
 
@@ -190,11 +189,6 @@ public class RoomAPI {
         return ResponseEntity.status(HttpStatus.OK).body(saveRoom);
     }
 
-//<<<<<<< HEAD
-//    @DeleteMapping("delete/{id}")
-//    public void deleteRoom(@PathVariable Long id) {
-//        iRoomService.deleteById(id);
-//=======
     @DeleteMapping("/{idRoom}")
     public ResponseEntity<?> delete(@PathVariable("idRoom") Long idRoom) {
         return ResponseEntity.ok(iRoomService.delete(idRoom));
