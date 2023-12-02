@@ -128,4 +128,15 @@ public class UserAPI {
     ) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateToHost(idUser));
     }
+
+    @PutMapping("/imageChange/{idUser}")
+    public ResponseEntity<?> imageChange(@PathVariable("idUser") long idUser,
+                                         @RequestParam(value = "imageUrl", required = false) MultipartFile imageUrl) {
+        if(!imageUrl.isEmpty()) {
+            UserEntity userEntitySave = userService.updateImage(idUser, imageUrl);
+            return ResponseEntity.status(HttpStatus.OK).body(userEntitySave);
+        }
+
+        return ResponseEntity.status(HttpStatus.OK).body("Không thay đổi hình ảnh.");
+    }
 }

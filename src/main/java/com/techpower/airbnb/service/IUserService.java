@@ -8,6 +8,7 @@ import com.techpower.airbnb.constant.Status;
 import com.techpower.airbnb.dto.OrderDTO;
 import com.techpower.airbnb.dto.RoomDTO;
 import com.techpower.airbnb.dto.UserDTO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -37,5 +38,7 @@ public interface IUserService {
     UserEntity update(UserEntity userEntity);
 
     UserEntity getOne(Long idUser);
+
+    UserEntity updateImage(Long idUser, MultipartFile imageUrl);
 
 }

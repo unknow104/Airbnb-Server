@@ -19,6 +19,7 @@ import com.techpower.airbnb.service.IRoomService;
 import com.techpower.airbnb.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -43,6 +44,8 @@ public class UserService implements IUserService {
     private FeedbackConverter feedbackConverter;
     @Autowired
     private FeedbackRepository feedbackRepository;
+    @Autowired
+    private CloudinaryService cloudinaryService;
     public List<OrderDTO> sortOrderListById(List<OrderDTO> orderList) {
         return orderList.stream()
                 .sorted(Comparator.comparingLong(OrderDTO::getId).reversed())
@@ -174,6 +177,13 @@ public class UserService implements IUserService {
     @Override
     public UserEntity getOne(Long idUser) {
         return userRepository.getOne(idUser);
+    }
+
+    @Override
+    public UserEntity updateImage(Long idUser, MultipartFile imageUrl) {
+        UserEntity existUser = userRepository.findOneById(idUser);
+        existUser.setImage(cloudinaryService.uploadImage(imageUrl));
+        return existUser;
     }
 
 }
