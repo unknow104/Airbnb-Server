@@ -111,6 +111,8 @@ public class RoomService implements IRoomService {
             List<ImageRoomEntity> imageRoomEntities = imageRoomRepository.findAllByRoomId(dto.getId());
             for (int i = 0; i < imageRoomEntities.size(); i++) {
                 cloudinaryService.deleteImage(imageRoomEntities.get(i).getUrlImage());
+                // Lấy vị trí của hình ảnh trong danh sách dto.getImages()
+                int imageIndex = i;
                 imageRoomRepository.save(ImageRoomEntity.builder()
                         .id(imageRoomEntities.get(i).getId())
                         .urlImage(dto.getImages().get(i))
@@ -170,10 +172,6 @@ public class RoomService implements IRoomService {
     }
 
     @Override
-    //<<<<<<< HEAD
-    //    public void deleteById(Long id) {
-    //        roomRepository.deleteById(id);
-    //=======
     public String delete(Long idRoom) {
         RoomEntity roomEntity = roomRepository.findOneById(idRoom);
         if (roomEntity == null) {

@@ -35,6 +35,7 @@ public interface IUserService {
     UserDTO lock(long idUser,String status);
 
     UserEntity update(UserEntity userEntity);
+    UserEntity updateImage(UserEntity userEntity);
 
     UserEntity getOne(Long idUser);
 

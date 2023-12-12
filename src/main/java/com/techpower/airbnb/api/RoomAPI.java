@@ -106,7 +106,8 @@ public class RoomAPI {
             @RequestParam("maxGuests") Integer maxGuests,
             @RequestParam("numLivingRooms") Integer numLivingRooms,
             @RequestParam("numBathrooms") Integer numBathrooms,
-            @RequestParam("numBedrooms") Integer numBedrooms
+            @RequestParam("numBedrooms") Integer numBedrooms,
+            @RequestParam(value = "allowPet", required = false) boolean allowPet
     ) throws IOException, InterruptedException, ApiException {
 
         List<String> imagesDTO = new ArrayList<>();
@@ -135,6 +136,7 @@ public class RoomAPI {
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)
                 .numBedrooms(numBedrooms)
+                .allowPet(allowPet)
                 .build();
         RoomDTO saveRoom = iRoomService.save(roomDTO, idUser);
         if (saveRoom == null) {
@@ -144,18 +146,20 @@ public class RoomAPI {
     }
 
     @PutMapping("/{idRoom}")
-    public ResponseEntity<RoomDTO> update(@PathVariable("idRoom") long idRoom,
-                                          @RequestParam("name") String name,
-                                          @RequestParam("description") String description,
-                                          @RequestParam("price") double price,
-                                          @RequestParam(value = "images", required = false) List<MultipartFile> images,
-                                          @RequestParam(value = "codeLocation", required = false) String codeLocation,
-                                          @RequestParam("address") String address,
-                                          @RequestParam("amenities") List<Long> amenityIds,
-                                          @RequestParam("maxGuests") int maxGuests,
-                                          @RequestParam("numLivingRooms") int numLivingRooms,
-                                          @RequestParam("numBathrooms") int numBathrooms,
-                                          @RequestParam("numBedrooms") int numBedrooms) throws IOException, InterruptedException, ApiException {
+    public ResponseEntity<RoomDTO> update(
+            @PathVariable("idRoom") long idRoom,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("price") double price,
+            @RequestParam(value = "images", required = false) List<MultipartFile> images,
+            @RequestParam(value = "codeLocation", required = false) String codeLocation,
+            @RequestParam("address") String address,
+            @RequestParam(value ="allowPet", required = false ) boolean allowPet,
+            @RequestParam("amenities") List<Long> amenityIds,
+            @RequestParam("maxGuests") int maxGuests,
+            @RequestParam("numLivingRooms") int numLivingRooms,
+            @RequestParam("numBathrooms") int numBathrooms,
+            @RequestParam("numBedrooms") int numBedrooms) throws IOException, InterruptedException, ApiException {
 
         List<String> imagesDTO = new ArrayList<>();
         if (images != null && !images.isEmpty()) {
@@ -177,6 +181,7 @@ public class RoomAPI {
                 .name(name)
                 .description(description)
                 .price(price)
+                .allowPet(allowPet)
                 .images(imagesDTO)
                 .address(addressDTO)
                 .codeLocation(codeLocation)

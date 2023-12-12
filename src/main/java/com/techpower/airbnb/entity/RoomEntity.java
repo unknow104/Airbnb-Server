@@ -33,7 +33,7 @@ public class RoomEntity {
     @Column
     private LocalDateTime updated_at;
     @Column
-    private boolean hotAndColdMachine;
+    private boolean allowPet;
     @Column(name = "num_living_rooms")
     private int numLivingRooms;
     @Column(name = "num_bathrooms")

@@ -99,7 +99,6 @@ public class UserAPI {
             @RequestParam(value = "image", required = false) MultipartFile image) {
         try {
             UserEntity existUser = userService.getOne(idUser);
-
             if (existUser != null) {
                 UserEntity userEntity = UserEntity.builder()
                         .id(idUser)
@@ -108,12 +107,11 @@ public class UserAPI {
                         .email(email)
                         .birthday(birthday)
                         .gender(gender)
+                        .image(cloudinaryService.uploadImage(image))
                         .build();
-                if (image != null) {
-                    userEntity.setImage(cloudinaryService.uploadImage(image));
-                }
                 UserEntity userEntitySave = userService.update(userEntity);
                 return ResponseEntity.status(HttpStatus.OK).body(userEntitySave);
+
             } else {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Không tìm thấy người dùng này");
             }

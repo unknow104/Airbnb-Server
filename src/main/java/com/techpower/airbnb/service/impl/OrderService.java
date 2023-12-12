@@ -106,7 +106,7 @@ public class OrderService implements IOrderService {
                         statisticalRepository.save(new StatisticalEntity(userEntityAdmin));
                     }
                     if (statisticalRepository.findOneByUserAndYearAndMonthAndDay(
-                            userEntityAdmin,
+                            userEntitySeller,
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth())
@@ -119,7 +119,7 @@ public class OrderService implements IOrderService {
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth());
                     StatisticalEntity statisticalSeller = statisticalRepository.findOneByUserAndYearAndMonthAndDay(
-                            userEntityAdmin,
+                            userEntitySeller,
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getYear(),
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getMonthValue(),
                             LocalDate.now(ZoneId.of("Asia/Ho_Chi_Minh")).getDayOfMonth());
@@ -153,34 +153,34 @@ public class OrderService implements IOrderService {
         return "<div style=\"text-align: center; margin: 0 auto; max-width: 600px; padding: 20px; border: 1px solid #ccc; box-shadow: 0 0 10px rgba(0,0,0,0.1);\">\n" +
                 "  <img src=\"https://res.cloudinary.com/drn7nawnc/image/upload/v1687899742/unnamed_gssfpv.png\" alt=\"Logo\" style=\"max-width: 50%;\">\n" +
                 "  <h2 style=\"font-size: 24px; margin-bottom: 10px;\">Hi " + name + ",</h2>" +
-                "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Thank you for trusting our service, below is the information about your order </p>" +
+                "<p style=\"Margin:0 0 20px 0;font-size:19px;line-height:25px;color:#0b0c0c\"> Cảm ơn bạn đã tin tưởng Panther, bên dưới là thông tin đặt phòng của bạn</p>" +
                 "<table style=\"width:100%; margin-bottom: 20px; border-collapse: collapse;\">\n" +
                 "  <tr>\n" +
-                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Your destination</th>\n" +
+                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Phòng bạn đặt</th>\n" +
                 "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + nameRoom + "</td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
-                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Address</th>\n" +
+                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Điểm đến của bạn</th>\n" +
                 "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + addressRoom + "</td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
-                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Received Date</th>\n" +
+                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Ngày nhận phòng</th>\n" +
                 "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + orderDTO.getReceivedDate() + "</td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
-                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Checkout Date</th>\n" +
+                "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Ngày trả phòng</th>\n" +
                 "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + orderDTO.getCheckoutDate() + "</td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
                 "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Num Guests</th>\n" +
-                "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + orderDTO.getNumGuests() + " people" + "</td>\n" +
+                "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + orderDTO.getNumGuests() + " khách" + "</td>\n" +
                 "  </tr>\n" +
                 "  <tr>\n" +
                 "    <th style=\"text-align: left; border: 1px solid #ccc; color: darkblue; padding: 8px;\">Total Price</th>\n" +
                 "    <td style=\"border: 1px solid #ccc; padding: 8px;\">" + orderDTO.getTotalPrice() + " VND" + "</td>\n" +
                 "  </tr>\n" +
                 "</table>" +
-                "<p style=\"font-size: 16px; margin-bottom: 20px;\">Thank you and have a great trip</p>" +
+                "<p style=\"font-size: 16px; margin-bottom: 20px;\">Cảm ơn bạn đã sử dụng dịch vụ của Panther</p>" +
                 "</div>";
     }
 

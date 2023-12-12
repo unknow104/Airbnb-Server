@@ -172,6 +172,13 @@ public class UserService implements IUserService {
     }
 
     @Override
+    public UserEntity updateImage(UserEntity userEntity) {
+        UserEntity existUser = userRepository.findOneById(userEntity.getId());
+        existUser.setImage(userEntity.getImage());
+        return userRepository.save(existUser);
+    }
+
+    @Override
     public UserEntity getOne(Long idUser) {
         return userRepository.getOne(idUser);
     }
