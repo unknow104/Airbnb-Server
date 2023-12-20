@@ -26,8 +26,6 @@ public class RoomEntity {
     private String description;
     @Column
     private double price;
-    @OneToMany(mappedBy = "room")
-    private List<AmenityEntity> amenities;
     @Column
     private LocalDateTime created_at;
     @Column
@@ -60,4 +58,11 @@ public class RoomEntity {
     @OneToMany(mappedBy = "room")
     private List<WishlistEntity> wishlists;
 
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "room_amenity",
+            joinColumns = @JoinColumn(name = "room_id"),
+            inverseJoinColumns = @JoinColumn(name = "amenity_id")
+    )
+    private List<AmenityEntity> amenities = new ArrayList<>();
 }

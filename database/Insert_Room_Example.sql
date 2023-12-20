@@ -265,14 +265,15 @@ INSERT INTO `room` (`room_id`, `air_conditioner`, `description`, `hot_and_cold_m
 --
 
 INSERT INTO `users` (`users_id`, `birthday`, `code_confirmed`, `confirmed`, `email`, `gender`, `name`, `password`, `phone`, `role`, `status`) VALUES
-(1, NULL, 'l9oWNw', b'1', 'ntgiangwk@owner.airbnb', b'0', 'Nguyễn Trường Giang', '$2a$10$qUbvHt71kG8TnEkiIGbcgOheLYP63vl/tWHmTLZ0RMVn1kt27ZYJS', '0394366313', 'OWNER', 'ACTIVE'),
-(2, NULL, 'sYABrD', b'1', 'dinhdanh@owner.airbnb', b'0', 'Trần Đình Danh', '$2a$10$./NFk3hPCdOvMqmBixl5VOhTgGNDVlVK6/lSvfL33WsBp77Hbo9oG', '0915111222', 'OWNER', 'ACTIVE'),
-(3, NULL, '4PrRni', b'1', 'thanhtai@owner.airbnb', b'0', 'Hoàng Thanh Tài', '$2a$10$TSu0ggf39WJgfZeF7eYqJeqxNE6NrAe1eYCUqbR23qVRRTPFtMJA2', '0919130192', 'OWNER', 'ACTIVE'),
-(4, NULL, 'u6JREl', b'1', 'vanhieu@owner.airbnb', b'0', 'Nguyễn Văn Hiếu', '$2a$10$oKqZbO/pVaNuNUoHYHrlNuUbojy01GkRLyEPgdaAmWLSy4yGwJrG6', '0919130074', 'OWNER', 'ACTIVE'),
-(5, NULL, 'u6ugUi', b'1', 'hoangduc@owner.airbnb', b'0', 'Nguyễn Hoàng Đức', '$2a$10$ugZdRjASE76/m3jwuPmSaenbRt8oWqDyLrX9TK5dd6mhEFKoAhCp6', '0919130049', 'OWNER', 'ACTIVE'),
-(6, NULL, 'kuKP7F', b'1', 'congdanh@owner.airbnb', b'0', 'Phạm Công Danh', '$2a$10$6Z9y7DLNRDhaSmObMT4Bm.HYG.3n4PQBswa0XB780CRK0UZNaGlPW', '0919130027', 'OWNER', 'ACTIVE'),
-(7, '21/07/2001', 'OxGldI', b'1', 'thanhtai21701@gmail.com', b'1', 'Hoàng Thanh Tài', '$2a$10$fzGGluYF/HnYKS4c4q2e3u4PtN/5P4P2uf.XV/T.J93.fPdRLnp/O', '0123456778', 'CUSTOMER', 'ACTIVE'),
-(8, '28/01/2001', '2CFSqa', b'1', 'truongdai.game@gmail.com', b'1', 'Nguyễn Trương Giang', '$2a$10$EQnogYYYRHQUxqQoleBDruj4387d5/zKlxyIG1HVgzbyjAdBoIJVa', '0394366313', 'CUSTOMER', 'ACTIVE');
+(1, NULL, 'l9oWNw', b'1', 'namphuong@gmail.com', b'0', 'Trần Phương Nam', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0394366313', 'OWNER', 'ACTIVE'),
+(2, NULL, 'sYABrD', b'1', 'thevinh@gmail.com', b'0', 'Võ Thế Vinh', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0915111222', 'OWNER', 'ACTIVE'),
+(3, NULL, '4PrRni', b'1', 'thanhnguyen@gmail.com', b'0', 'Võ Thành Nguyên', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0919130192', 'OWNER', 'ACTIVE'),
+(4, NULL, 'u6JREl', b'1', 'chikhanh@gmail.com', b'0', 'Đặng Chí Khanh', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0919130074', 'OWNER', 'ACTIVE'),
+(5, NULL, 'u6ugUi', b'1', 'hoangdong@gmail.com', b'0', 'Tô Hoàng Đông', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0919130049', 'OWNER', 'ACTIVE'),
+(6, NULL, 'kuKP7F', b'1', 'nguyenvana@gmail.com', b'0', 'Nguyễn Văn A', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0919130027', 'OWNER', 'ACTIVE'),
+(7, '21/07/2001', 'OxGldI', b'1', 'Nguyễn Văn B@gmail.com', b'1', 'Nguyễn Văn B', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy', '0123456778', 'CUSTOMER', 'ACTIVE'),
+(8, '28/01/2001', '2CFSqa', b'1', 'Nguyễn Văn C@gmail.com', b'1', 'Nguyễn Văn C', '$2a$12$S6O2pKuVMtuLQGonOZQWB.cVUVAyDH8YCFyxOH446gnJLuoReeByy
+', '0394366313', 'CUSTOMER', 'ACTIVE');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

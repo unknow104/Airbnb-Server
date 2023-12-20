@@ -34,7 +34,8 @@ public class AmenityService implements IAmenityService {
     @Override
     public AmenityDTO save(AmenityDTO dto) throws IOException, InterruptedException, ApiException {
         AmenityEntity amenityEntity = amenityConverter.toEntity(dto);
-        return amenityConverter.toDTO(amenityRepository.save(amenityEntity));
+        AmenityEntity saveAmenity = amenityRepository.save(amenityEntity);
+        return amenityConverter.toDTO(saveAmenity);
     }
 
     @Override

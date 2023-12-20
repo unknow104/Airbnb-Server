@@ -26,28 +26,44 @@ import java.util.List;
 
 @Service
 public class RoomService implements IRoomService {
+    private final RoomRepository roomRepository;
+    private final UserRepository userRepository;
+    private final RoomConverter roomConverter;
+    private final ImageRoomRepository imageRoomRepository;
+    private final LocationRepository locationRepository;
+    private final OrderRepository orderRepository;
+    private final FeedbackRepository feedbackRepository;
+    private final GeocodingService geocodingService;
+    private final AddressRepository addressRepository;
+    private final CloudinaryService cloudinaryService;
+    private final FeedbackConverter feedbackConverter;
+
     @Autowired
-    private RoomRepository roomRepository;
-    @Autowired
-    private UserRepository userRepository;
-    @Autowired
-    private RoomConverter roomConverter;
-    @Autowired
-    private ImageRoomRepository imageRoomRepository;
-    @Autowired
-    private LocationRepository locationRepository;
-    @Autowired
-    private OrderRepository orderRepository;
-    @Autowired
-    private FeedbackRepository feedbackRepository;
-    @Autowired
-    private GeocodingService geocodingService;
-    @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
-    private CloudinaryService cloudinaryService;
-    @Autowired
-    private FeedbackConverter feedbackConverter;
+    public RoomService(
+            RoomRepository roomRepository,
+            UserRepository userRepository,
+            RoomConverter roomConverter,
+            ImageRoomRepository imageRoomRepository,
+            LocationRepository locationRepository,
+            OrderRepository orderRepository,
+            FeedbackRepository feedbackRepository,
+            GeocodingService geocodingService,
+            AddressRepository addressRepository,
+            CloudinaryService cloudinaryService,
+            FeedbackConverter feedbackConverter
+    ) {
+        this.roomRepository = roomRepository;
+        this.userRepository = userRepository;
+        this.roomConverter = roomConverter;
+        this.imageRoomRepository = imageRoomRepository;
+        this.locationRepository = locationRepository;
+        this.orderRepository = orderRepository;
+        this.feedbackRepository = feedbackRepository;
+        this.geocodingService = geocodingService;
+        this.addressRepository = addressRepository;
+        this.cloudinaryService = cloudinaryService;
+        this.feedbackConverter = feedbackConverter;
+    }
 
     @Override
     public List<RoomDTO> findAll() {
@@ -106,12 +122,18 @@ public class RoomService implements IRoomService {
 
     @Override
     public RoomDTO update(RoomDTO dto) throws IOException, InterruptedException, ApiException {
-        //xử lí khi có hình mới, nếu thay thì thay 1 lần 5 hình luôn :))
+        updateImages(dto);
+        updateAddress(dto);
+
+        RoomEntity roomEntityNew = roomConverter.toEntity(dto, roomRepository.findOneById(dto.getId()));
+        return roomConverter.toDTO(roomRepository.save(roomEntityNew));
+    }
+
+    private void updateImages(RoomDTO dto) {
         if (dto.getImages().size() == 5) {
             List<ImageRoomEntity> imageRoomEntities = imageRoomRepository.findAllByRoomId(dto.getId());
             for (int i = 0; i < imageRoomEntities.size(); i++) {
                 cloudinaryService.deleteImage(imageRoomEntities.get(i).getUrlImage());
-                // Lấy vị trí của hình ảnh trong danh sách dto.getImages()
                 int imageIndex = i;
                 imageRoomRepository.save(ImageRoomEntity.builder()
                         .id(imageRoomEntities.get(i).getId())
@@ -120,28 +142,20 @@ public class RoomService implements IRoomService {
                         .build());
             }
         }
+    }
 
+    private void updateAddress(RoomDTO dto) throws IOException, InterruptedException, ApiException {
         RoomEntity roomEntityOld = roomRepository.findOneById(dto.getId());
-        //        roomEntityOld.setLocation(locationRepository.findOneByCode(dto.getCodeLocation()));
 
-        //xử lí address
         if (!dto.getAddress().getFullAddress().equalsIgnoreCase(roomEntityOld.getAddress().getFullAddress())) {
             LatLng latLng = geocodingService.getLatLngFromAddress(dto.getAddress().getFullAddress());
             AddressEntity addressEntityNew = new AddressEntity();
-            if (latLng == null) {
-                addressEntityNew.setLat(0);
-                addressEntityNew.setLng(0);
-            } else {
-                addressEntityNew.setLat(latLng.lat);
-                addressEntityNew.setLng(latLng.lng);
-            }
             addressEntityNew.setId(roomEntityOld.getAddress().getId());
             addressEntityNew.setFullAddress(dto.getAddress().getFullAddress());
+            addressEntityNew.setLat(latLng != null ? latLng.lat : 0);
+            addressEntityNew.setLng(latLng != null ? latLng.lng : 0);
             roomEntityOld.setAddress(addressRepository.save(addressEntityNew));
         }
-
-        RoomEntity roomEntityNew = roomConverter.toEntity(dto, roomEntityOld);
-        return roomConverter.toDTO(roomRepository.save(roomEntityNew));
     }
 
     @Override

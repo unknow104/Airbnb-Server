@@ -10,15 +10,18 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
 public class RoomConverter {
+    private final AddressConverter addressConverter;
+    private final AmenityConverter amenityConverter;
+
     @Autowired
-    private AddressConverter addressConverter;
-    @Autowired
-    private AmenityConverter amenityConverter;
+    public RoomConverter(AddressConverter addressConverter, AmenityConverter amenityConverter) {
+        this.addressConverter = addressConverter;
+        this.amenityConverter = amenityConverter;
+    }
 
     public RoomEntity toEntity(RoomDTO roomDTO) {
         List<AmenityEntity> amenities = roomDTO.getAmenities()
@@ -68,6 +71,7 @@ public class RoomConverter {
                 .numLivingRooms(roomEntity.getNumLivingRooms())
                 .numBedrooms(roomEntity.getNumBedrooms())
                 .numBathrooms(roomEntity.getNumBathrooms())
+                .userName(roomEntity.getUser().getName())
                 .available(true)
                 .build();
 

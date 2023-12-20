@@ -3,6 +3,8 @@ package com.techpower.airbnb.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Builder
@@ -22,7 +24,7 @@ public class AmenityEntity {
     @Column
     private String imageUrl;
 
-    @ManyToOne
-    @JoinColumn(name = "room_id")
-    private RoomEntity room;
+
+    @ManyToMany(mappedBy = "amenities")
+    private List<RoomEntity> rooms = new ArrayList<>();
 }

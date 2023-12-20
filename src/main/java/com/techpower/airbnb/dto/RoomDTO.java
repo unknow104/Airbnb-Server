@@ -31,4 +31,5 @@ public class RoomDTO {
     private int numLivingRooms;
     private int numBathrooms;
     private int numBedrooms;
+    private String userName;
 }
