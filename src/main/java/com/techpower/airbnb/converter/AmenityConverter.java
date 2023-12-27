@@ -17,7 +17,7 @@ public class AmenityConverter {
                 .build();
     }
 
-    public AmenityDTO toDTO(AmenityEntity amenityEntity){
+    public AmenityDTO toDTO(AmenityEntity amenityEntity) {
         return AmenityDTO.builder()
                 .id(amenityEntity.getId())
                 .name(amenityEntity.getName())
@@ -28,7 +28,7 @@ public class AmenityConverter {
 
     public List<AmenityDTO> toDTOs(List<AmenityEntity> amenityEntities) {
         List<AmenityDTO> amenityDTOs = new ArrayList<>();
-        for(AmenityEntity amenityEntity:amenityEntities) {
+        for (AmenityEntity amenityEntity : amenityEntities) {
             amenityDTOs.add(toDTO(amenityEntity));
         }
         return amenityDTOs;
@@ -37,7 +37,9 @@ public class AmenityConverter {
     public AmenityEntity toEntity(AmenityDTO amenityDTO, AmenityEntity amenityEntity) {
         amenityEntity.setId(amenityDTO.getId());
         amenityEntity.setName(amenityDTO.getName());
-        amenityEntity.setImageUrl(amenityDTO.getImageUrl());
+        if (amenityDTO.getImageUrl() != null) {
+            amenityEntity.setImageUrl(amenityDTO.getImageUrl());
+        }
         return amenityEntity;
     }
 }
