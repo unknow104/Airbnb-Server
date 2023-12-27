@@ -39,7 +39,7 @@ public class AmenityAPI {
     @PostMapping("")
     public ResponseEntity<?> save(
             @RequestParam("name") String name,
-            @RequestParam(value = "imageUrl",required = false) MultipartFile imageUrl
+            @RequestParam(value = "imageUrl", required = false) MultipartFile imageUrl
     ) throws IOException, InterruptedException, ApiException {
         try {
             AmenityDTO amenityDTO = AmenityDTO.builder()
@@ -59,14 +59,16 @@ public class AmenityAPI {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal server error");
         }
     }
+
     @PutMapping("/{idAmenity}")
-    public ResponseEntity<AmenityDTO> update(@PathVariable("idAmenity") long idRoom
+    public ResponseEntity<AmenityDTO> update(
+            @PathVariable("idAmenity") long idAmenity
             , @RequestParam("name") String name
-            , @RequestParam("imageUrl") String imageUrl) throws IOException, InterruptedException, ApiException {
+            , @RequestParam(value = "imageUrl", required = false) MultipartFile imageUrl) throws IOException, InterruptedException, ApiException {
         AmenityDTO amenityDTO = AmenityDTO.builder()
-                .id(idRoom)
+                .id(idAmenity)
                 .name(name)
-                .imageUrl(imageUrl)
+                .imageUrl(cloudinaryService.uploadImage(imageUrl))
                 .build();
         AmenityDTO amenityDTOSave = iAmenityService.update(amenityDTO);
 

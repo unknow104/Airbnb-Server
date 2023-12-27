@@ -12,18 +12,18 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "amenity")
-public class AmenityEntity {
+@Table(name ="category")
+public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "amenity_id")
+    @Column(name = "category_id")
     private Long id;
-    @Column
+
+    @Column(name = "category_name")
     private String name;
-    @Column
-    private String imageUrl;
 
+    private String image;
 
-    @ManyToMany(mappedBy = "amenities")
+    @ManyToMany(mappedBy = "category")
     private List<RoomEntity> rooms = new ArrayList<>();
 }
