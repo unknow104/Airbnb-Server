@@ -2,9 +2,7 @@ package com.techpower.airbnb.api;
 
 import com.techpower.airbnb.auth.AuthenticationResponse;
 import com.techpower.airbnb.auth.AuthenticationService;
-import com.techpower.airbnb.request.AuthenticationRequest;
-import com.techpower.airbnb.request.RegisterCustomerRequest;
-import com.techpower.airbnb.request.RegisterOwnerRequest;
+import com.techpower.airbnb.request.*;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -47,6 +45,20 @@ public class AuthenticationController {
     public ResponseEntity<?> delete(@PathVariable String email) {
         authenticationService.delete(email);
         return ResponseEntity.status(204).build();
+    }
+    @PostMapping("/send-otp-for-password-reset")
+    public ResponseEntity<?> sendOTPForPasswordReset(@RequestBody ForgotPasswordRequest request) {
+        return authenticationService.sendOTPForPasswordReset(request.getEmail());
+    }
+
+    @PostMapping("/verify-otp-for-password-reset")
+    public ResponseEntity<?> verifyOTPForPasswordReset(@RequestBody VerifyOTPRequest request) {
+        return authenticationService.verifyOTPForPasswordReset(request.getEmail(), request.getOtpCode());
+    }
+
+    @PostMapping("/reset-password-with-otp")
+    public ResponseEntity<?> resetPasswordWithOTP(@RequestBody ResetPasswordWithOTPRequest request) {
+        return authenticationService.resetPasswordWithOTP(request);
     }
 }
 

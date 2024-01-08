@@ -10,7 +10,6 @@ import com.techpower.airbnb.service.IStatisticalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -28,6 +27,12 @@ public class StatisticalService implements IStatisticalService {
         return statisticalList.stream()
                 .sorted(Comparator.comparingInt(StatisticalDTO::getMonth))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<StatisticalDTO> getStatisticalByYearForAllUsers() {
+        List<StatisticalEntity> statisticalEntities = statisticalRepository.findAll();
+        return sortStatisticalListByMonth(statisticalConverter.mapperTOList(statisticalEntities));
     }
 
     @Override

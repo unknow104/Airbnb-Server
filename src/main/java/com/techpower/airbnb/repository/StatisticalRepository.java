@@ -13,5 +13,7 @@ public interface StatisticalRepository extends JpaRepository<StatisticalEntity, 
 
     List<StatisticalEntity> findByUser_IdAndYear(Long id, int year);
 
+    List<StatisticalEntity> findByYear(int year);
+
     List<StatisticalEntity> findAllByUserAndYear(UserEntity userEntity, int year);
 }

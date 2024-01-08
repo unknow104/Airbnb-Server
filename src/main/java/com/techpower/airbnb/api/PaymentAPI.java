@@ -13,10 +13,6 @@ import java.io.UnsupportedEncodingException;
 @RestController
 @RequestMapping("/api/v1/payment")
 public class PaymentAPI {
-    //Số thẻ:9704198526191432198
-    //Tên chu thẻ:NGUYEN VAN A
-    //Ngày phát hành:07/15
-    //OTP:123456
     @Autowired
     private IPaymentService iPaymentService;
 
@@ -27,11 +23,12 @@ public class PaymentAPI {
     }
 
     @GetMapping("/vnpay/transaction/airbnb")
-    public ResponseEntity<?> transaction(@RequestParam("idOrder") long idOrder,
-                                         @RequestParam("vnp_Amount") String totalAmount,
-                                         @RequestParam("vnp_BankCode") String bankCode,
-                                         @RequestParam("vnp_OrderInfo") String orderInfo,
-                                         @RequestParam("vnp_ResponseCode") String responseCode
+    public ResponseEntity<?> transaction(
+            @RequestParam("idOrder") long idOrder,
+            @RequestParam("vnp_Amount") String totalAmount,
+            @RequestParam("vnp_BankCode") String bankCode,
+            @RequestParam("vnp_OrderInfo") String orderInfo,
+            @RequestParam("vnp_ResponseCode") String responseCode
     ) {
         PaymentTransactionVNPayRequest request = PaymentTransactionVNPayRequest.builder()
                 .amount(totalAmount)
