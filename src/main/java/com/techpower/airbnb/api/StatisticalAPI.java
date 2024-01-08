@@ -29,7 +29,11 @@ public class StatisticalAPI {
             return ResponseEntity.notFound().build();
         }
     }
-    
+    @GetMapping("/all-users")
+    public ResponseEntity<List<StatisticalDTO>> getStatisticalByYearForAllUsers() {
+        List<StatisticalDTO> statisticalList = iStatisticalService.getStatisticalByYearForAllUsers();
+        return ResponseEntity.ok(statisticalList);
+    }
     @GetMapping("/{idUser}/{year}")
     public ResponseEntity<List<StatisticalDTO>> getStatisticalByYear(
             @PathVariable("idUser") long idUser,

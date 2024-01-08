@@ -25,5 +25,4 @@ public class OrderDTO {
     @NotNull
     private int numGuests;
     private double totalPrice;
-
 }
