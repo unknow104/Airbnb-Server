@@ -2,14 +2,12 @@ package com.techpower.airbnb.api;
 
 import com.google.maps.errors.ApiException;
 import com.techpower.airbnb.dto.AddressDTO;
-import com.techpower.airbnb.dto.AmenityDTO;
 import com.techpower.airbnb.dto.FeedbackDTO;
 import com.techpower.airbnb.dto.RoomDTO;
 import com.techpower.airbnb.repository.RoomRepository;
 import com.techpower.airbnb.request.SearchHouseRequest;
 import com.techpower.airbnb.response.DayBooking;
 import com.techpower.airbnb.service.IRoomService;
-import com.techpower.airbnb.service.impl.AmenityService;
 import com.techpower.airbnb.service.impl.CloudinaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -33,8 +31,6 @@ public class RoomAPI {
     private RoomRepository roomRepository;
     @Autowired
     private CloudinaryService cloudinaryService;
-    @Autowired
-    private AmenityService amenityService;
 
     @GetMapping("")
     public ResponseEntity<List<RoomDTO>> findAll() {
@@ -107,7 +103,15 @@ public class RoomAPI {
             @RequestParam("numLivingRooms") Integer numLivingRooms,
             @RequestParam("numBathrooms") Integer numBathrooms,
             @RequestParam("numBedrooms") Integer numBedrooms,
-            @RequestParam(value = "allowPet", required = false) boolean allowPet
+            @RequestParam(value = "allowPet", required = false) boolean allowPet,
+            @RequestParam(value = "washingMachine", required = false) boolean washingMachine,
+            @RequestParam(value = "television", required = false) boolean television,
+            @RequestParam(value = "airConditioner", required = false) boolean airConditioner,
+            @RequestParam(value = "wifi", required = false) boolean wifi,
+            @RequestParam(value = "kitchen", required = false) boolean kitchen,
+            @RequestParam(value = "parking", required = false) boolean parking,
+            @RequestParam(value = "pool", required = false) boolean pool,
+            @RequestParam(value = "hotAndColdMachine", required = false) boolean hotAndColdMachine
     ) throws IOException, InterruptedException, ApiException {
 
         List<String> imagesDTO = new ArrayList<>();
@@ -118,10 +122,6 @@ public class RoomAPI {
             }
         }
 
-        List<AmenityDTO> amenities = amenityIds.stream()
-                .map(amenityId -> amenityService.findOneById(amenityId))
-                .toList();
-
         AddressDTO addressDTO = new AddressDTO();
         addressDTO.setFullAddress(address);
         RoomDTO roomDTO = RoomDTO.builder()
@@ -130,13 +130,20 @@ public class RoomAPI {
                 .price(price)
                 .images(imagesDTO)
                 .address(addressDTO)
-                .amenities(amenities)
                 .codeLocation(codeLocation)
                 .maxGuests(maxGuests)
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)
                 .numBedrooms(numBedrooms)
                 .allowPet(allowPet)
+                .washingMachine(washingMachine)
+                .television(television)
+                .airConditioner(airConditioner)
+                .wifi(wifi)
+                .kitchen(kitchen)
+                .parking(parking)
+                .pool(pool)
+                .hotAndColdMachine(hotAndColdMachine)
                 .build();
         RoomDTO saveRoom = iRoomService.save(roomDTO, idUser);
         if (saveRoom == null) {
@@ -154,7 +161,15 @@ public class RoomAPI {
             @RequestParam(value = "images", required = false) List<MultipartFile> images,
             @RequestParam(value = "codeLocation", required = false) String codeLocation,
             @RequestParam("address") String address,
-            @RequestParam(value ="allowPet", required = false ) boolean allowPet,
+            @RequestParam(value = "allowPet", required = false) boolean allowPet,
+            @RequestParam(value = "washingMachine", required = false) boolean washingMachine,
+            @RequestParam(value = "television", required = false) boolean television,
+            @RequestParam(value = "airConditioner", required = false) boolean airConditioner,
+            @RequestParam(value = "wifi", required = false) boolean wifi,
+            @RequestParam(value = "kitchen", required = false) boolean kitchen,
+            @RequestParam(value = "parking", required = false) boolean parking,
+            @RequestParam(value = "pool", required = false) boolean pool,
+            @RequestParam(value = "hotAndColdMachine", required = false) boolean hotAndColdMachine,
             @RequestParam("amenities") List<Long> amenityIds,
             @RequestParam("maxGuests") int maxGuests,
             @RequestParam("numLivingRooms") int numLivingRooms,
@@ -169,10 +184,6 @@ public class RoomAPI {
             }
         }
 
-        List<AmenityDTO> amenities = amenityIds.stream()
-                .map(amenityId -> amenityService.findOneById(amenityId))
-                .toList();
-
         AddressDTO addressDTO = new AddressDTO();
         addressDTO.setFullAddress(address);
 
@@ -182,10 +193,17 @@ public class RoomAPI {
                 .description(description)
                 .price(price)
                 .allowPet(allowPet)
+                .washingMachine(washingMachine)
+                .television(television)
+                .airConditioner(airConditioner)
+                .wifi(wifi)
+                .kitchen(kitchen)
+                .parking(parking)
+                .pool(pool)
+                .hotAndColdMachine(hotAndColdMachine)
                 .images(imagesDTO)
                 .address(addressDTO)
                 .codeLocation(codeLocation)
-                .amenities(amenities)
                 .maxGuests(maxGuests)
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)

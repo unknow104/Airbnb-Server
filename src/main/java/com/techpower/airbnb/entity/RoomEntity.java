@@ -30,6 +30,22 @@ public class RoomEntity {
     @Column
     private LocalDateTime updated_at;
     @Column
+    private boolean hotAndColdMachine;
+    @Column
+    private boolean washingMachine;
+    @Column
+    private boolean television;
+    @Column
+    private boolean airConditioner;
+    @Column
+    private boolean wifi;
+    @Column
+    private boolean kitchen;
+    @Column
+    private boolean parking;
+    @Column
+    private boolean pool;
+    @Column
     private boolean allowPet;
     @Column(name = "num_living_rooms")
     private int numLivingRooms;
@@ -56,19 +72,4 @@ public class RoomEntity {
 
     @OneToMany(mappedBy = "room")
     private List<WishlistEntity> wishlists;
-
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(name = "room_category",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id")
-    )
-    private List<CategoryEntity> category = new ArrayList<>();
-
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(
-            name = "room_amenity",
-            joinColumns = @JoinColumn(name = "room_id"),
-            inverseJoinColumns = @JoinColumn(name = "amenity_id")
-    )
-    private List<AmenityEntity> amenities = new ArrayList<>();
 }
