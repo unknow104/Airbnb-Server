@@ -23,8 +23,15 @@ public class RoomDTO {
     private String codeLocation;
     private AddressDTO address;
     private boolean available;
+    private boolean washingMachine;
+    private boolean television;
+    private boolean airConditioner;
+    private boolean wifi;
+    private boolean kitchen;
+    private boolean parking;
+    private boolean pool;
+    private boolean hotAndColdMachine;
     private boolean allowPet;
-    private List<AmenityDTO> amenities;
     private LocalDateTime created_at;
     private LocalDateTime updated_at;
     private int maxGuests;

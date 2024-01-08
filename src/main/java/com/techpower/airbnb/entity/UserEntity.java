@@ -9,7 +9,10 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 
 @Builder
 @Getter
@@ -63,16 +66,6 @@ public class UserEntity implements UserDetails {
 
     @OneToMany(mappedBy = "user")
     private List<WishlistEntity> wishlists;
-
-    @ManyToMany
-    @JoinTable(
-            name = "user_achievements",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "achievement_id"))
-    private Set<AchievementEntity> achievements = new HashSet<>();
-
-
-
 
     @Override
     public int hashCode() {
