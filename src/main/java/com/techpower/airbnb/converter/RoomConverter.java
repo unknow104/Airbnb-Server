@@ -34,7 +34,7 @@ public class RoomConverter {
                 .pool(roomDTO.isPool())
                 .hotAndColdMachine(roomDTO.isHotAndColdMachine())
                 .allowPet(roomDTO.isAllowPet())
-                .maxGuests(roomDTO.getMaxGuests())
+                .maxGuest(roomDTO.getMaxGuest())
                 .numLivingRooms(roomDTO.getNumLivingRooms())
                 .numBathrooms(roomDTO.getNumBathrooms())
                 .numBedrooms(roomDTO.getNumBedrooms())
@@ -68,7 +68,7 @@ public class RoomConverter {
                 .pool(roomEntity.isPool())
                 .hotAndColdMachine(roomEntity.isHotAndColdMachine())
                 .allowPet(roomEntity.isAllowPet())
-                .maxGuests(roomEntity.getMaxGuests())
+                .maxGuest(roomEntity.getMaxGuest())
                 .numLivingRooms(roomEntity.getNumLivingRooms())
                 .numBedrooms(roomEntity.getNumBedrooms())
                 .numBathrooms(roomEntity.getNumBathrooms())
@@ -100,8 +100,10 @@ public class RoomConverter {
         entity.setHotAndColdMachine(dto.isHotAndColdMachine());
         entity.setAllowPet(dto.isAllowPet());
         entity.setPrice(dto.getPrice());
-        entity.setCreated_at(dto.getCreated_at());
-        entity.setUpdated_at(dto.getUpdated_at());
+        entity.setMaxGuest(dto.getMaxGuest());
+        entity.setNumBathrooms(dto.getNumBathrooms());
+        entity.setNumLivingRooms(dto.getNumLivingRooms());
+        entity.setNumBedrooms(dto.getNumBedrooms());
         return entity;
     }
 }

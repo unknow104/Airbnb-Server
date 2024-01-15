@@ -43,9 +43,6 @@ public class OrderService implements IOrderService {
 
     @Override
     public OrderDTO createOrder(OrderDTO orderDTO, long idRoom) {
-        if (orderDTO.getNumGuests() > roomRepository.findOneById(idRoom).getMaxGuests()) {
-            return null;
-        }
         orderDTO.setStatus(Order.BOOKED.toString());
         int numDate = countDate(orderDTO.getReceivedDate(), orderDTO.getCheckoutDate());
         RoomEntity roomEntity = roomRepository.findOneById(idRoom);

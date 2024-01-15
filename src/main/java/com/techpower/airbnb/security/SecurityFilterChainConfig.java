@@ -22,9 +22,10 @@ public class SecurityFilterChainConfig {
     private final JWTAuthenticationFilter jwtAuthenticationFilter;
     private final AuthenticationEntryPoint authenticationEntryPoint;
 
-    public SecurityFilterChainConfig(AuthenticationProvider authenticationProvider,
-                                     JWTAuthenticationFilter jwtAuthenticationFilter,
-                                     @Qualifier("delegatedAuthEntryPoint") AuthenticationEntryPoint authenticationEntryPoint) {
+    public SecurityFilterChainConfig(
+            AuthenticationProvider authenticationProvider,
+            JWTAuthenticationFilter jwtAuthenticationFilter,
+            @Qualifier("delegatedAuthEntryPoint") AuthenticationEntryPoint authenticationEntryPoint) {
         this.authenticationProvider = authenticationProvider;
         this.jwtAuthenticationFilter = jwtAuthenticationFilter;
         this.authenticationEntryPoint = authenticationEntryPoint;

@@ -34,7 +34,7 @@ public class EmailService implements EmailSender {
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject(subject);//"Confirm your email"
-            helper.setFrom(new InternetAddress("dacn.airbnb@gmail.com", "Booking Master"));
+            helper.setFrom(new InternetAddress("dacn.panther@gmail.com", "Panther"));
             mailSender.send(mimeMessage);
         } catch (MessagingException e) {
             LOGGER.error("failed to send email", e);

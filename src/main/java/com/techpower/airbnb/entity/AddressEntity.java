@@ -18,6 +18,12 @@ public class AddressEntity {
     @Column
     private String fullAddress;
     @Column
+    private String city;
+    @Column
+    private String district;
+    @Column
+    private String ward;
+    @Column
     private double lat;
     @Column
     private double lng;

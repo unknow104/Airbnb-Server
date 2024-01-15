@@ -13,5 +13,4 @@ public interface RoomRepository extends JpaRepository<RoomEntity, Long> {
     List<RoomEntity> findAllByUserId(Long id);
     @Query("select r from RoomEntity r where r.location.id = ?1")
     List<RoomEntity> findByLocation_Id(Long id);
-
 }

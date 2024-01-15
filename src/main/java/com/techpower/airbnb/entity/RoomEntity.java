@@ -53,23 +53,21 @@ public class RoomEntity {
     private int numBathrooms;
     @Column(name = "num_bedrooms")
     private int numBedrooms;
-    @Column(name = "max_guests")
-    private int maxGuests;
+    @Column(name = "maxGuest")
+    private int maxGuest;
     @OneToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "address_id")
     private AddressEntity address;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+    @OneToMany(mappedBy = "room")
+    private List<ImageRoomEntity> images = new ArrayList<>();
+    @OneToMany(mappedBy = "room")
+    private List<OrderEntity> orders = new ArrayList<>();
+    @OneToMany(mappedBy = "room")
+    private List<WishlistEntity> wishlists;
     @ManyToOne
     @JoinColumn(name = "location_id")
     private LocationEntity location;
-    @OneToMany(mappedBy = "room")
-    private List<ImageRoomEntity> images = new ArrayList<>();
-
-    @OneToMany(mappedBy = "room")
-    private List<OrderEntity> orders = new ArrayList<>();
-
-    @OneToMany(mappedBy = "room")
-    private List<WishlistEntity> wishlists;
 }

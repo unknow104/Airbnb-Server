@@ -9,10 +9,12 @@ import com.techpower.airbnb.dto.FeedbackDTO;
 import com.techpower.airbnb.dto.RoomDTO;
 import com.techpower.airbnb.entity.*;
 import com.techpower.airbnb.repository.*;
+import com.techpower.airbnb.request.AddressDetails;
 import com.techpower.airbnb.request.SearchHouseRequest;
 import com.techpower.airbnb.response.DayBooking;
 import com.techpower.airbnb.service.IRoomService;
 import jakarta.transaction.Transactional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +32,6 @@ public class RoomService implements IRoomService {
     private final UserRepository userRepository;
     private final RoomConverter roomConverter;
     private final ImageRoomRepository imageRoomRepository;
-    private final LocationRepository locationRepository;
     private final OrderRepository orderRepository;
     private final FeedbackRepository feedbackRepository;
     private final GeocodingService geocodingService;
@@ -38,13 +39,15 @@ public class RoomService implements IRoomService {
     private final CloudinaryService cloudinaryService;
     private final FeedbackConverter feedbackConverter;
 
+    private final LocationRepository locationRepository;
+
     @Autowired
     public RoomService(
+            LocationRepository locationRepository,
             RoomRepository roomRepository,
             UserRepository userRepository,
             RoomConverter roomConverter,
             ImageRoomRepository imageRoomRepository,
-            LocationRepository locationRepository,
             OrderRepository orderRepository,
             FeedbackRepository feedbackRepository,
             GeocodingService geocodingService,
@@ -56,13 +59,13 @@ public class RoomService implements IRoomService {
         this.userRepository = userRepository;
         this.roomConverter = roomConverter;
         this.imageRoomRepository = imageRoomRepository;
-        this.locationRepository = locationRepository;
         this.orderRepository = orderRepository;
         this.feedbackRepository = feedbackRepository;
         this.geocodingService = geocodingService;
         this.addressRepository = addressRepository;
         this.cloudinaryService = cloudinaryService;
         this.feedbackConverter = feedbackConverter;
+        this.locationRepository = locationRepository;
     }
 
     @Override
@@ -162,7 +165,7 @@ public class RoomService implements IRoomService {
     public List<RoomDTO> search(SearchHouseRequest request) {
         List<RoomDTO> roomDTOS = roomConverter.toDTOs(roomRepository.findByLocation_Id(request.getIdLocation()));
         for (RoomDTO roomDTO : roomDTOS) {
-            if (request.getGuests() <= roomDTO.getMaxGuests()) {
+            if (request.getGuests() <= roomDTO.getMaxGuest()) {
                 List<DayBooking> bookingDates = checkDateOfRoom(roomDTO.getId());
                 roomDTO.setAvailable(isBookingConflict(bookingDates, request.getStartDate(), request.getEndDate()));
             }

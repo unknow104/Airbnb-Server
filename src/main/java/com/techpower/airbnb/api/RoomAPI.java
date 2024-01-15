@@ -96,10 +96,8 @@ public class RoomAPI {
             @RequestParam("description") String description,
             @RequestParam("price") Double price,
             @RequestParam(value = "images", required = false) List<MultipartFile> images,
-            @RequestParam("codeLocation") String codeLocation,
             @RequestParam("address") String address,
-            @RequestParam("amenities") List<Long> amenityIds,
-            @RequestParam("maxGuests") Integer maxGuests,
+            @RequestParam("maxGuest") int maxGuest,
             @RequestParam("numLivingRooms") Integer numLivingRooms,
             @RequestParam("numBathrooms") Integer numBathrooms,
             @RequestParam("numBedrooms") Integer numBedrooms,
@@ -130,8 +128,7 @@ public class RoomAPI {
                 .price(price)
                 .images(imagesDTO)
                 .address(addressDTO)
-                .codeLocation(codeLocation)
-                .maxGuests(maxGuests)
+                .maxGuest(maxGuest)
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)
                 .numBedrooms(numBedrooms)
@@ -170,8 +167,7 @@ public class RoomAPI {
             @RequestParam(value = "parking", required = false) boolean parking,
             @RequestParam(value = "pool", required = false) boolean pool,
             @RequestParam(value = "hotAndColdMachine", required = false) boolean hotAndColdMachine,
-            @RequestParam("amenities") List<Long> amenityIds,
-            @RequestParam("maxGuests") int maxGuests,
+            @RequestParam("maxGuest") int maxGuest,
             @RequestParam("numLivingRooms") int numLivingRooms,
             @RequestParam("numBathrooms") int numBathrooms,
             @RequestParam("numBedrooms") int numBedrooms) throws IOException, InterruptedException, ApiException {
@@ -204,7 +200,7 @@ public class RoomAPI {
                 .images(imagesDTO)
                 .address(addressDTO)
                 .codeLocation(codeLocation)
-                .maxGuests(maxGuests)
+                .maxGuest(maxGuest)
                 .numLivingRooms(numLivingRooms)
                 .numBathrooms(numBathrooms)
                 .numBedrooms(numBedrooms)
